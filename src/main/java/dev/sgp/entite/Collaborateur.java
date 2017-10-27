@@ -38,7 +38,15 @@ public class Collaborateur {
 	private String adresse;
 	/** actif : boolean */
 	private boolean actif;
+	/** intitulePoste : String */
 	private String intitulePoste;
+	/** banque : String */
+	private String banque;
+	/** bic : String */
+	private String bic;
+	/** iban : String */
+	private String iban;
+	/** matriculeStatic : int */
 	private static int matriculeStatic = 0;
 
 	public Collaborateur(String nom, String prenom, String fonction, Departement departement, String email,
@@ -48,15 +56,19 @@ public class Collaborateur {
 		this.fonction = fonction;
 		this.departement = departement;
 		String mail = ResourceBundle.getBundle("application").getString("mail");
-		this.email = nom + "." + prenom + mail;
+		this.email = nom.toLowerCase() + "." + prenom.toLowerCase() + mail;
 		this.telephone = telephone;
 		this.actif = true;
 		this.matricule = ++matriculeStatic;
 		this.photo = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpmLbYqzTEg3Pl5Vw_8k1O4UtUHPlIgZ4qK-8PGRNahxqauPbj";
+		this.dateDeNaissance=LocalDate.now();
+		this.numSecu="1234567891023";
+		this.iban="Non renseigné";
+		this.bic="Non renseigné";
 	}
 
 	public Collaborateur(String nom, String prenom, LocalDate date, String adresse, String numSecu) {
-		this(nom,prenom,"Non renseigné", Constantes.DEPART_SERVICE.listerDepartments().get(0), "", "Non renseigné");
+		this(nom, prenom, "Non renseigné", Constantes.DEPART_SERVICE.listerDepartments().get(0), "", "Non renseigné");
 		this.dateDeNaissance = date;
 		this.adresse = adresse;
 		this.numSecu = numSecu;
@@ -271,6 +283,66 @@ public class Collaborateur {
 	 */
 	public static void setMatriculeStatic(int matriculeStatic) {
 		Collaborateur.matriculeStatic = matriculeStatic;
+	}
+
+	/**
+	 * @return the intitulePoste
+	 */
+	public String getIntitulePoste() {
+		return intitulePoste;
+	}
+
+	/**
+	 * @param intitulePoste
+	 *            the intitulePoste to set
+	 */
+	public void setIntitulePoste(String intitulePoste) {
+		this.intitulePoste = intitulePoste;
+	}
+
+	/**
+	 * @return the banque
+	 */
+	public String getBanque() {
+		return banque;
+	}
+
+	/**
+	 * @param banque
+	 *            the banque to set
+	 */
+	public void setBanque(String banque) {
+		this.banque = banque;
+	}
+
+	/**
+	 * @return the bic
+	 */
+	public String getBic() {
+		return bic;
+	}
+
+	/**
+	 * @param bic
+	 *            the bic to set
+	 */
+	public void setBic(String bic) {
+		this.bic = bic;
+	}
+
+	/**
+	 * @return the iban
+	 */
+	public String getIban() {
+		return iban;
+	}
+
+	/**
+	 * @param iban
+	 *            the iban to set
+	 */
+	public void setIban(String iban) {
+		this.iban = iban;
 	}
 
 }

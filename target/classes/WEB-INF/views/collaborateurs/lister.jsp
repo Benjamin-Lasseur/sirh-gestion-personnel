@@ -1,6 +1,7 @@
 <%@page import="dev.sgp.service.DepartementService"%>
 <%@page import="dev.sgp.util.Constantes"%>
 <%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="dev.sgp.entite.Collaborateur"%>
 <%@page import="dev.sgp.entite.Departement"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
@@ -13,6 +14,13 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <!-- Bootstrap CSS -->
+<script>
+function chercher(){
+	document.forms[0].action="<%=request.getContextPath()%>/collaborateurs/lister";
+		document.forms[0].method = "POST";
+		document.forms[0].submit();
+	}
+</script>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
 	integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
@@ -31,8 +39,9 @@
 					class="nav-item nav-link active"
 					href="<%=request.getContextPath()%>/collaborateurs/lister">Collaborateurs<span
 					class="sr-only">(current)</span></a> <a class="nav-item nav-link"
-					href=href="<%=request.getContextPath()%>/collaborateurs/statistique">Statistique</a>
-				<a class="nav-item nav-link" href=href="<%=request.getContextPath()%>/collaborateurs/activites">Activités</a>
+					href="<%=request.getContextPath()%>/collaborateurs/statistique">Statistique</a>
+				<a class="nav-item nav-link"
+					href="<%=request.getContextPath()%>/collaborateurs/activites">Activités</a>
 			</div>
 		</div>
 	</nav>
@@ -44,7 +53,7 @@
 	<div class="row offset-1">
 		<h1>Les collaborateurs</h1>
 	</div>
-	<form action="">
+	<form>
 		<div class="form-group row offset-1">
 			<label class="col-form-label col-3">Rechercher un nom ou un
 				prénom qui commence par :</label>
@@ -52,11 +61,12 @@
 				<input type="text" class="form-control" id="nom" />
 			</div>
 			<div>
-				<button type="button" class="btn btn-primary">Rechercher</button>
+				<button type="button" class="btn btn-primary" name="departement"
+					onclick="chercher()">Rechercher</button>
 			</div>
 			<div class="form-check offset-1">
 				<label class="form-check-label"> <input
-					class="form-check-input" type="checkbox"> Voir les
+					class="form-check-input" type="checkbox" name="afficherDesactiver" <% String str = (String)request.getAttribute("afficherDesactiver"); if (str!=null){ %>checked<%} %>> Voir les
 					collaborateurs désactivés
 				</label>
 			</div>
@@ -64,17 +74,17 @@
 		<div class="form-group row offset-1">
 			<label class="col-form-label col-3">Filtrer par département :</label>
 			<div class="col-2">
-				<select class="form-control" id="exampleFormControlSelect1">
-				<option>Tous</option>
+				<select class="form-control" id="exampleFormControlSelect1" name="departement">
+					<option <%if(request.getAttribute("departement")==null){ %>selected<%}%>>Tous</option>
 					<%for (Departement dep : Constantes.DEPART_SERVICE.listerDepartments()){ %>
-					<option><%=dep.getNom()%></option>
+					<option <%if(request.getAttribute("departement")!=null && request.getAttribute("departement").equals(dep.getNom())){ %>selected<%}%>><%=dep.getNom()%></option>
 					<%} %>
 				</select>
 			</div>
 		</div>
 	</form>
 	<div class="card-deck">
-		<%List<Collaborateur> listCollab = Constantes.COLLAB_SERVICE.listerCollaborateurs();
+		<%List<Collaborateur> listCollab = (List<Collaborateur>)request.getAttribute("collaborateurs");
 for (Collaborateur col : listCollab){
 %>
 		<div class="card col-3">
@@ -101,8 +111,10 @@ for (Collaborateur col : listCollab){
 					<label class="card-text col-5">Téléphone</label><label><%=col.getTelephone()%></label>
 				</div>
 				<div class="row">
-					<a href="edit.html" class="offset-9"><button type="button"
-							name="button" class="btn btn-primary">Editer</button></a>
+					<a
+						href="<%=request.getContextPath()%>/collaborateurs/edit?matricule=<%=col.getMatricule()%>"
+						class="offset-9"><button type="button" name="button"
+							class="btn btn-primary">Editer</button></a>
 				</div>
 			</div>
 		</div>
