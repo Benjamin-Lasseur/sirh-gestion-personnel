@@ -86,7 +86,6 @@
 										</form>
 										<div class="card-deck">
 											<%List<Collaborateur> listCollab = (List<Collaborateur>)request.getAttribute("collaborateurs");
-											int compteur=0;
 											for (Collaborateur col : listCollab){
 												%>
 													<div class="card col-4">
@@ -97,7 +96,7 @@
 																	<%=col.getNom()%>
 																	<%=col.getPrenom()%></h5>
 																	<div class="row col-12 no-padding no-margin">
-																		<label class="col-5 no-padding no-margin">Fonction</label><label> <%=col.getFonction()%><%=compteur%></label>
+																		<label class="col-5 no-padding no-margin">Fonction</label><label> <%=col.getFonction()%></label>
 																	</div>
 																	<div class="row col-12 no-padding no-margin">
 																		<label class="col-5 no-padding no-margin">Département</label><label> <%=col.getDepartement().getNom()%></label>
