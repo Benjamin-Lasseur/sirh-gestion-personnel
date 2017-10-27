@@ -1,5 +1,6 @@
+<%@page import="dev.sgp.util.Constantes"%>
 <%@page import="java.util.List"%>
-<%@page import="dev.sgp.collab.Collaborateur"%>
+<%@page import="dev.sgp.entite.Collaborateur"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="en">
@@ -14,6 +15,8 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
 	integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
 	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/editer.css">
 
 </head>
 <body class="container-fluid">
@@ -23,16 +26,18 @@
 				<img
 					src="https://assets.chooseyourboss.com/companies/logos/000/004/322/square/Logo_DTA.jpg?1457453234"
 					alt="logo" height="42" width="42"> <a
-					class="nav-item nav-link active" href="lister.html">Collaborateurs<span
+					class="nav-item nav-link active"
+					href="<%=request.getContextPath()%>/collaborateurs/lister">Collaborateurs<span
 					class="sr-only">(current)</span></a> <a class="nav-item nav-link"
-					href="../statistique.html">Statistique</a> <a
-					class="nav-item nav-link" href="../activites.html">Activités</a>
+					href=href="<%=request.getContextPath()%>/collaborateurs/statistique">Statistique</a>
+				<a class="nav-item nav-link" href=href="<%=request.getContextPath()%>/collaborateurs/activites">Activités</a>
 			</div>
 		</div>
 	</nav>
 	<div class="row col-3 offset-9">
-		<a href="nouveau.html"><button type="button"
-				class="btn btn-primary">Ajouter un collaborateur</button></a>
+		<a href="<%=request.getContextPath()%>/collaborateurs/nouveau"><button
+				type="button" class="btn btn-primary">Ajouter un
+				collaborateur</button></a>
 	</div>
 	<div class="row offset-1">
 		<h1>Les collaborateurs</h1>
@@ -67,12 +72,11 @@
 		</div>
 	</form>
 	<div class="card-deck">
-		<%List<Collaborateur> listCollab = (List<Collaborateur>)request.getAttribute("listCol");
+		<%List<Collaborateur> listCollab = Constantes.COLLAB_SERVICE.listerCollaborateurs();
 for (Collaborateur col : listCollab){
 %>
 		<div class="card col-3">
-			<img class="card-img-top"
-				src="http://www.worldofbuzz.com/wp-content/uploads/2015/04/noprofilemale.gif"
+			<img class="card-img-top" src="<%=col.getPhoto()%>"
 				alt="Photo collaborateur">
 			<div class="card-block">
 				<h4 class="card-title">

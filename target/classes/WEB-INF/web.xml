@@ -3,13 +3,20 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 <web-app>
 	<display-name>Archetype Created Web Application</display-name>
+
 	<servlet>
 		<servlet-name>ListerCollaborateursController</servlet-name>
 		<servlet-class>dev.sgp.web.ListerCollaborateursController</servlet-class>
 	</servlet>
+	
 	<servlet>
 		<servlet-name>EditerCollaborateurController</servlet-name>
 		<servlet-class>dev.sgp.web.EditerCollaborateurController</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>NouveauCollaborateurController</servlet-name>
+		<servlet-class>dev.sgp.web.NouveauCollaborateurController</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
@@ -21,4 +28,11 @@
 		<servlet-name>EditerCollaborateurController</servlet-name>
 		<url-pattern>/collaborateurs/editer</url-pattern>
 	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>NouveauCollaborateurController</servlet-name>
+		<url-pattern>/collaborateurs/nouveau</url-pattern>
+	</servlet-mapping>
+
+
 </web-app>
