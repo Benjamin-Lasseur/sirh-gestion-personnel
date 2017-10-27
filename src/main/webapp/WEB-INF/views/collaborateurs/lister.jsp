@@ -1,6 +1,8 @@
+<%@page import="dev.sgp.service.DepartementService"%>
 <%@page import="dev.sgp.util.Constantes"%>
 <%@page import="java.util.List"%>
 <%@page import="dev.sgp.entite.Collaborateur"%>
+<%@page import="dev.sgp.entite.Departement"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="en">
@@ -63,10 +65,10 @@
 			<label class="col-form-label col-3">Filtrer par département :</label>
 			<div class="col-2">
 				<select class="form-control" id="exampleFormControlSelect1">
-					<option>Tous</option>
-					<option>Comptabilité</option>
-					<option>Ressources humaines</option>
-					<option>Informatique</option>
+				<option>Tous</option>
+					<%for (Departement dep : Constantes.DEPART_SERVICE.listerDepartments()){ %>
+					<option><%=dep.getNom()%></option>
+					<%} %>
 				</select>
 			</div>
 		</div>
@@ -88,7 +90,7 @@ for (Collaborateur col : listCollab){
 					</label>
 				</div>
 				<div class="row">
-					<label class="card-text col-5">Département</label><label> <%=col.getDepartement()%>
+					<label class="card-text col-5">Département</label><label> <%=col.getDepartement().getNom()%>
 					</label>
 				</div>
 				<div class="row">

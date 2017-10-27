@@ -2,6 +2,9 @@ package dev.sgp.entite;
 
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
+import java.util.ResourceBundle;
+
+import dev.sgp.util.Constantes;
 
 public class Collaborateur {
 	/** nom : String */
@@ -15,7 +18,7 @@ public class Collaborateur {
 	private String fonction;
 	/** departement : String */
 
-	private String departement;
+	private Departement departement;
 	/** email : String */
 	private String email;
 	/** telephone : String */
@@ -35,29 +38,29 @@ public class Collaborateur {
 	private String adresse;
 	/** actif : boolean */
 	private boolean actif;
+	private String intitulePoste;
 	private static int matriculeStatic = 0;
 
-	public Collaborateur(String nom, String prenom, String fonction, String departement, String email,
+	public Collaborateur(String nom, String prenom, String fonction, Departement departement, String email,
 			String telephone) {
 		this.nom = nom;
 		this.prenom = prenom;
 		this.fonction = fonction;
 		this.departement = departement;
-		this.email = email;
+		String mail = ResourceBundle.getBundle("application").getString("mail");
+		this.email = nom + "." + prenom + mail;
 		this.telephone = telephone;
+		this.actif = true;
+		this.matricule = ++matriculeStatic;
+		this.photo = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpmLbYqzTEg3Pl5Vw_8k1O4UtUHPlIgZ4qK-8PGRNahxqauPbj";
 	}
 
 	public Collaborateur(String nom, String prenom, LocalDate date, String adresse, String numSecu) {
-		this.nom = nom;
-		this.prenom = prenom;
+		this(nom,prenom,"Non renseigné", Constantes.DEPART_SERVICE.listerDepartments().get(0), "", "Non renseigné");
 		this.dateDeNaissance = date;
 		this.adresse = adresse;
 		this.numSecu = numSecu;
-		this.matricule = ++matriculeStatic;
 		this.dateHeureCreation = ZonedDateTime.now();
-		this.email = nom + "." + prenom + "@societe.com";
-		this.photo = "https://assets.chooseyourboss.com/companies/logos/000/004/322/square/Logo_DTA.jpg?1457453234";
-		this.actif = true;
 	}
 
 	/**
@@ -108,7 +111,7 @@ public class Collaborateur {
 	/**
 	 * @return the departement
 	 */
-	public String getDepartement() {
+	public Departement getDepartement() {
 		return departement;
 	}
 
@@ -116,7 +119,7 @@ public class Collaborateur {
 	 * @param departement
 	 *            the departement to set
 	 */
-	public void setDepartement(String departement) {
+	public void setDepartement(Departement departement) {
 		this.departement = departement;
 	}
 

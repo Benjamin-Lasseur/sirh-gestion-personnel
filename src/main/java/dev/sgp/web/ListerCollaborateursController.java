@@ -19,9 +19,7 @@ public class ListerCollaborateursController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		final CollaborateurService collabService = Constantes.COLLAB_SERVICE;
 //		List<Collaborateur> listCol = new ArrayList<>();
-//		listCol.add(new Collaborateur("Jean", "Dupont", "Dev", "Info", "jean.dupont@email.com", "0606060606"));
-//		listCol.add(new Collaborateur("Robert", "Dupond", "Dev", "Info", "robert.dupont@email.com", "0707070707"));
-//		listCol.add(new Collaborateur("Nicolas", "Cage", "Dev", "Info", "robert.dupont@email.com", "0707070707"));
+//		
 //		req.setAttribute("listCol", Constantes.COLLAB_SERVICE.listerCollaborateurs());
 		req.getRequestDispatcher("/WEB-INF/views/collaborateurs/lister.jsp").forward(req, resp);
 	}
