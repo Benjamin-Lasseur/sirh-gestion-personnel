@@ -15,8 +15,8 @@ import dev.sgp.util.Constantes;
 
 public class EditerCollaborateurController extends HttpServlet {
 
-	/* (non-Javadoc)
-	 * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+	/* 
+	 * Controller du POST
 	 */
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -28,8 +28,8 @@ public class EditerCollaborateurController extends HttpServlet {
 		req.getRequestDispatcher("/WEB-INF/views/collaborateurs/edit.jsp").forward(req, resp);
 	}
 
-	/* (non-Javadoc)
-	 * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+	/* 
+	 * Controller du POST
 	 */
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -52,10 +52,6 @@ public class EditerCollaborateurController extends HttpServlet {
 			if(oDep.isPresent()){
 				collaborateur.setDepartement(oDep.get());
 			}
-			req.removeAttribute("matricule");
-			req.removeAttribute("afficherDesactiver");
-			req.removeAttribute("departement");
-			
 			req.setAttribute("collaborateurs", Constantes.COLLAB_SERVICE.listerCollaborateurs().stream().filter(c2 -> c2.isActif()).collect(Collectors.toList()));
 			req.getRequestDispatcher("/WEB-INF/views/collaborateurs/lister.jsp").forward(req, resp);
 			

@@ -49,6 +49,14 @@ public class Collaborateur {
 	/** matriculeStatic : int */
 	private static int matriculeStatic = 0;
 
+	/**Constructeur de collaborateurs dummys (pour l'affichage de la page d'acceuil)
+	 * @param nom
+	 * @param prenom
+	 * @param fonction
+	 * @param departement
+	 * @param email
+	 * @param telephone
+	 */
 	public Collaborateur(String nom, String prenom, String fonction, Departement departement, String email,
 			String telephone) {
 		this.nom = nom;
@@ -62,11 +70,18 @@ public class Collaborateur {
 		this.matricule = ++matriculeStatic;
 		this.photo = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpmLbYqzTEg3Pl5Vw_8k1O4UtUHPlIgZ4qK-8PGRNahxqauPbj";
 		this.dateDeNaissance=LocalDate.now();
-		this.numSecu="1234567891023";
+		this.numSecu="Non renseigné";
 		this.iban="Non renseigné";
 		this.bic="Non renseigné";
 	}
 
+	/**Constructeur appelé lors de l'instanciation d'un nouveau collaborateur par l'utilisateur
+	 * @param nom
+	 * @param prenom
+	 * @param date
+	 * @param adresse
+	 * @param numSecu
+	 */
 	public Collaborateur(String nom, String prenom, LocalDate date, String adresse, String numSecu) {
 		this(nom, prenom, "Non renseigné", Constantes.DEPART_SERVICE.listerDepartments().get(0), "", "Non renseigné");
 		this.dateDeNaissance = date;

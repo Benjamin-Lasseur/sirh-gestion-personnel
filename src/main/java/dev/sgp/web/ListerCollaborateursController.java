@@ -18,21 +18,20 @@ import dev.sgp.util.Constantes;
 
 public class ListerCollaborateursController extends HttpServlet {
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.
-	 * HttpServletRequest, javax.servlet.http.HttpServletResponse)
+	/* 
+	 * Controller du GET
 	 */
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.removeAttribute("afficherDesactiver");
-		req.removeAttribute("departement");
 		req.setAttribute("collaborateurs", Constantes.COLLAB_SERVICE.listerCollaborateurs());
-		
+		req.setAttribute("afficherDesactiver", null);
+		req.setAttribute("departement", null);
 		req.getRequestDispatcher("/WEB-INF/views/collaborateurs/lister.jsp").forward(req, resp);
 	}
 
+	/* 
+	 * Controller du POST
+	 */
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		Optional<Departement> oDep= Constantes.DEPART_SERVICE.listerDepartments().stream().filter(d -> d.getNom().equals(req.getParameter("departement"))).findFirst();

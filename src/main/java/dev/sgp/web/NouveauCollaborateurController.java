@@ -15,11 +15,7 @@ import dev.sgp.util.Constantes;
 public class NouveauCollaborateurController extends HttpServlet {
 
 	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest,
-	 * javax.servlet.http.HttpServletResponse)
+	 * Controller du GET
 	 */
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -27,11 +23,7 @@ public class NouveauCollaborateurController extends HttpServlet {
 	}
 
 	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest,
-	 * javax.servlet.http.HttpServletResponse)
+	 * Controller du POST
 	 */
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -42,7 +34,8 @@ public class NouveauCollaborateurController extends HttpServlet {
 		String numSecu = req.getParameter("numsecu");
 		Collaborateur c = new Collaborateur(nom, prenom, date, adresse, numSecu);
 		Constantes.COLLAB_SERVICE.sauvegarderCollaborateur(c);
-		req.setAttribute("collaborateurs", Constantes.COLLAB_SERVICE.listerCollaborateurs().stream().filter(c2 -> c2.isActif()).collect(Collectors.toList()));
+		req.setAttribute("collaborateurs", Constantes.COLLAB_SERVICE.listerCollaborateurs().stream()
+				.filter(c2 -> c2.isActif()).collect(Collectors.toList()));
 		req.getRequestDispatcher("/WEB-INF/views/collaborateurs/lister.jsp").forward(req, resp);
 	}
 }
