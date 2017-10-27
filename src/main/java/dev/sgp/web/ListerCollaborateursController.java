@@ -37,6 +37,11 @@ public class ListerCollaborateursController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		Optional<Departement> oDep= Constantes.DEPART_SERVICE.listerDepartments().stream().filter(d -> d.getNom().equals(req.getParameter("departement"))).findFirst();
 		List<Collaborateur> listCollab = Constantes.COLLAB_SERVICE.listerCollaborateurs();
+		String chercher = req.getParameter("cherchernom");
+		if (chercher!=null) {
+			listCollab = listCollab.stream().filter(c->c.getNom().toLowerCase().contains(chercher.toLowerCase())||c.getPrenom().toLowerCase().contains(chercher.toLowerCase())).collect(Collectors.toList());	
+		req.setAttribute("cherchernom", chercher);
+		}
 		if(oDep.isPresent()){
 			listCollab = listCollab.stream().filter(c->c.getDepartement().equals(oDep.get())).collect(Collectors.toList());	
 		}

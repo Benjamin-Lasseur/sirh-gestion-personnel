@@ -58,7 +58,8 @@ function chercher(){
 			<label class="col-form-label col-3">Rechercher un nom ou un
 				prénom qui commence par :</label>
 			<div class="col-2">
-				<input type="text" class="form-control" id="nom" />
+			<%String chercher = (String)request.getAttribute("cherchernom");%>
+				<input type="text" class="form-control" id="nom" name="cherchernom" <%if(chercher!=null){ %>value=<%=chercher%> <%} %>>
 			</div>
 			<div>
 				<button type="button" class="btn btn-primary" name="departement"
