@@ -84,10 +84,13 @@
 												</div>
 											</div>
 										</form>
-										<div class="card-deck">
+										
 											<%List<Collaborateur> listCollab = (List<Collaborateur>)request.getAttribute("collaborateurs");
+											int compteur=0;
 											for (Collaborateur col : listCollab){
-												%>
+												%><%if(compteur==0) {%>
+												<div class="card-deck padding-top">
+												<%} %>
 													<div class="card col-4">
 														<div class="media">
 															<img class="mr-3 col-4" style="padding-left:0px" src="<%=col.getPhoto()%>" alt="Photo Collaborateur">
@@ -116,7 +119,10 @@
 																	</div>
 																	</div>
 																	</div>
-															
+															<%if(compteur==2) {%>
+												</div>
+												<%compteur=0;}else{ %>
+												<% compteur++;}%>
 														<%} %>
 													</div>
 													<!-- Optional JavaScript -->
