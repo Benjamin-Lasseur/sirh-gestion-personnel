@@ -23,6 +23,7 @@ public class ListerCollaborateursController extends HttpServlet {
 	 */
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setAttribute("departements", Constantes.DEPART_SERVICE.listerDepartments());
 		req.setAttribute("collaborateurs", Constantes.COLLAB_SERVICE.listerCollaborateurs());
 		req.setAttribute("afficherDesactiver", null);
 		req.setAttribute("departement", null);
@@ -47,6 +48,7 @@ public class ListerCollaborateursController extends HttpServlet {
 		if(req.getParameter("afficherDesactiver")==null){
 		listCollab = listCollab.stream().filter(c -> c.isActif()).collect(Collectors.toList());
 		}
+		req.setAttribute("departements", Constantes.DEPART_SERVICE.listerDepartments());
 		req.setAttribute("collaborateurs", listCollab);
 		req.setAttribute("afficherDesactiver", req.getParameter("afficherDesactiver"));
 		req.setAttribute("departement", req.getParameter("departement"));

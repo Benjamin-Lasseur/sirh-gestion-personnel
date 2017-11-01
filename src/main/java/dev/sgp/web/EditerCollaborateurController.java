@@ -52,6 +52,7 @@ public class EditerCollaborateurController extends HttpServlet {
 			if(oDep.isPresent()){
 				collaborateur.setDepartement(oDep.get());
 			}
+			req.setAttribute("departements", Constantes.DEPART_SERVICE.listerDepartments());
 			req.setAttribute("collaborateurs", Constantes.COLLAB_SERVICE.listerCollaborateurs().stream().filter(c2 -> c2.isActif()).collect(Collectors.toList()));
 			req.getRequestDispatcher("/WEB-INF/views/collaborateurs/lister.jsp").forward(req, resp);
 			
