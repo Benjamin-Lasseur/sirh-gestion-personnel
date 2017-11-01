@@ -2,9 +2,9 @@
 <%@page import="dev.sgp.entite.Collaborateur"%>
 <%@page import="dev.sgp.entite.Departement"%>
 <%@page import="dev.sgp.util.Constantes"%>
-<%
-	Collaborateur col = (Collaborateur) request.getAttribute("collaborateur");
-%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page isELIgnored="false" %> 
+<c:set var="col" value="${requestScope.collaborateur}"></c:set>
 <!doctype html>
 <html lang="en">
 <head>
@@ -15,7 +15,7 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<script>
 	function validerEdit(){
-		 document.forms[0].action="<%=request.getContextPath()%>/collaborateurs/edit";
+		 document.forms[0].action="<c:url value="/collaborateurs/edit"/>";
 			document.forms[0].method = "POST";
 			document.forms[0].submit();
 	}
@@ -54,33 +54,33 @@
 						src="https://assets.chooseyourboss.com/companies/logos/000/004/322/square/Logo_DTA.jpg?1457453234"
 						alt="logo" height="42" width="42"> <a
 						class="nav-item nav-link active"
-						href="<%=request.getContextPath()%>/collaborateurs/lister">Collaborateurs<span
+						href="<c:url value="/collaborateurs/lister"/>">Collaborateurs<span
 						class="sr-only">(current)</span></a> <a class="nav-item nav-link"
-						href="<%=request.getContextPath()%>/collaborateurs/statistique">Statistique</a>
+						href="<c:url value="/statistique"/>">Statistique</a>
 					<a class="nav-item nav-link"
-						href="<%=request.getContextPath()%>/activites">Activités</a>
+						href="<c:url value="/activites"/>">Activités</a>
 				</div>
 			</div>
 		</nav>
 	</div>
 	<div class="row">
 		<div class="col-4">
-			<img src="<%=col.getPhoto()%>" alt="Photo du collaborateur"
+			<img src="${col.photo}" alt="Photo du collaborateur"
 				class="col-10 offset-1" id="imgphoto">
 		</div>
 		<form class="col-7">
 			<div class="row">
 				<div class="col-7">
-					<h1><%=col.getNom()%>
+					<h1>${col.nom}
 						-
-						<%=col.getPrenom()%>
+						${col.prenom}
 						-
-						<%=col.getMatricule()%>
-						<input type=hidden name="matricule" value="<%=col.getMatricule()%>"/></h1>
+						${col.matricule}
+						<input type=hidden name="matricule" value="${col.matricule}"/></h1>
 				</div>
 				<div class="offset-col-1">
 					<label id="desactiverlabel" for="desactiverbox"><input
-						id="desactiverbox" type="checkbox" name="desactiver" <%if(!col.isActif()){ %>checked<%} %>>Désactiver</label>
+						id="desactiverbox" type="checkbox" name="desactiver" <c:if test="${col.actif==false}">checked</c:if>>Désactiver</label>
 				</div>
 			</div>
 			<div class="row">
@@ -104,31 +104,31 @@
 									</select>
 								</div>
 								<div class="row">
-									<label class="card-text col-6">Nom</label><label class="col-6"><%=col.getNom()%></label>
+									<label class="card-text col-6">Nom</label><label class="col-6">${col.nom}</label>
 								</div>
 								<div class="row">
 									<label class="card-text col-6">Prénom</label><label
-										class="col-6"><%=col.getPrenom()%></label>
+										class="col-6">${col.prenom}</label>
 								</div>
 								<div class="row">
-									<label class="card-text col-6">Date de naissance</label><label class="col-6"><%=col.getDateDeNaissance()%></label>
+									<label class="card-text col-6">Date de naissance</label><label class="col-6">${col.dateDeNaissance}</label>
 								</div>
 								<div class="row">
 									<label class="card-text col-6">Adresse</label><input
-										name ="adresse" type="text" class="col-6" value="<%=col.getAdresse()%>" />
+										name ="adresse" type="text" class="col-6" value="${col.adresse}" />
 								</div>
 								<div class="row">
 									<label class="card-text col-6">Numéro de sécurité
 										sociale</label><label class="col-6"
-										><%=col.getNumSecu()%></label>
+										>${col.numSecu}</label>
 								</div>
 								<div class="row">
 									<label class="card-text col-6">Téléphone</label><input
-										name ="telephone" type="text" class="col-6" value="<%=col.getTelephone()%>" />
+										name ="telephone" type="text" class="col-6" value="${col.telephone}" />
 								</div>
 								<div class="row">
 									<label class="card-text col-6">Email</label><input type="text"
-										class="col-6" value="<%=col.getEmail()%>" />
+										class="col-6" value="${col.email}" />
 								</div>
 							</div>
 						</div>
@@ -146,14 +146,16 @@
 								<div class="row">
 									<label class="card-text col-6">Département</label><select name="departement"
 										class="form-control col-6" id="exampleFormControlSelect1">
-										<%for (Departement dep : Constantes.DEPART_SERVICE.listerDepartments()){ %>
-					<option <%if(dep.equals(col.getDepartement())){%>selected<%} %>><%=dep.getNom()%></option>
-					<%} %>
+										<c:forEach var="dep" items="${requestScope.departements}">
+										<option <c:if test="${col.departement==dep}">selected</c:if>>${dep.nom}</option>
+										
+										</c:forEach>
+								
 									</select>
 								</div>
 								<div class="row">
 									<label class="card-text col-6">Nom</label><input type="text"
-										class="col-6" name ="fonction" value="<%=col.getFonction()%>" />
+										class="col-6" name ="fonction" value="${col.fonction}" />
 								</div>
 							</div>
 						</div>
@@ -171,11 +173,11 @@
 							<div class="card-body">
 								<div class="row">
 									<label class="card-text col-6">IBAN</label><input type="text"
-									name="iban"	class="col-6" value="<%=col.getIban()%>" />
+									name="iban"	class="col-6" value="${col.iban}" />
 								</div>
 								<div class="row">
 									<label class="card-text col-6">BIC</label><input type="text"
-										name="bic" class="col-6" value="<%=col.getBic()%>" />
+										name="bic" class="col-6" value="${col.bic}" />
 								</div>
 							</div>
 						</div>

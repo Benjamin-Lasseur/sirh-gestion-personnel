@@ -40,7 +40,7 @@
 					class="nav-item nav-link active"
 					href="<c:url value="/collaborateurs/lister"/>">Collaborateurs<span
 					class="sr-only">(current)</span></a> <a class="nav-item nav-link"
-					href="<c:url value="statistique"/>">Statistique</a>
+					href="<c:url value="/statistique"/>">Statistique</a>
 				<a class="nav-item nav-link"
 					href="<c:url value="/activites"/>">Activités</a>
 			</div>

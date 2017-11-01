@@ -25,6 +25,7 @@ public class EditerCollaborateurController extends HttpServlet {
 		if (c.isPresent()){
 			req.setAttribute("collaborateur", c.get());
 		}
+		req.setAttribute("departements", Constantes.DEPART_SERVICE.listerDepartments());
 		req.getRequestDispatcher("/WEB-INF/views/collaborateurs/edit.jsp").forward(req, resp);
 	}
 
