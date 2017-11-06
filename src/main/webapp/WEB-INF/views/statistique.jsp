@@ -62,13 +62,13 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="mapVisite" items="${requestScope.nbVisites}">
+				<c:forEach var="mapVisite" items="${requestScope.visitesWeb}">
 					<tr>
-						<th scope="row">${mapVisite.key}</th>
-						<td>${mapVisite.value}</td>
-						<td>/</td>
-						<td>/</td>
-						<td>/</td>
+						<th scope="row">${mapVisite.chemin}</th>
+						<td>${mapVisite.nbConnections}</td>
+						<td>${mapVisite.tempsExecutionMoyen}</td>
+						<td>${mapVisite.tempsExecutionMax}</td>
+						<td>${mapVisite.tempsExecutionMin}</td>
 					</tr>
 				</c:forEach>
 			</tbody>

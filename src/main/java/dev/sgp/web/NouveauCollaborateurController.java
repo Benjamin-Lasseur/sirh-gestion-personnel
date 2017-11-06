@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import dev.sgp.entite.Collaborateur;
 import dev.sgp.util.Constantes;
 
+@WebServlet("/collaborateurs/nouveau")
 public class NouveauCollaborateurController extends HttpServlet {
 
 	/*
@@ -41,11 +43,12 @@ public class NouveauCollaborateurController extends HttpServlet {
 		LocalDate date = LocalDate.parse(dateString);
 		String adresse = req.getParameter(parametres.get(3));
 		String numSecu = req.getParameter(parametres.get(4));
-		if(parametres.stream().filter(p->p.equals("")).findAny().isPresent()) {
+		if (parametres.stream().filter(p -> p.equals("")).findAny().isPresent()) {
 			StringBuilder str = new StringBuilder("Le(s) paramètre(s) suivant(s) manque(nt): ");
-			parametres.stream().forEach(p -> {if(p.equals("")) {
-			str.append(" ").append(p);	
-			}
+			parametres.stream().forEach(p -> {
+				if (p.equals("")) {
+					str.append(" ").append(p);
+				}
 			});
 			resp.sendError(400, str.toString());
 		}

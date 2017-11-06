@@ -27,9 +27,6 @@ public class DepartementService {
 	 * Création du departement service et instaciation de départements de base
 	 */
 	public DepartementService() {
-		this.listeDepartements.add(new Departement("Comptabilite"));
-		this.listeDepartements.add(new Departement("Ressources humaines"));
-		this.listeDepartements.add(new Departement("Informatique"));
-		this.listeDepartements.add(new Departement("Administratif"));
+		
 	}
 }

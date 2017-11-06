@@ -28,11 +28,6 @@ public class CollaborateurService {
 	 * Création du collaborateur service et instaciation de dummys
 	 */
 	public CollaborateurService() {
-		this.listeCollaborateurs.add(new Collaborateur("Jean", "Dupont", "Dev",
-				Constantes.DEPART_SERVICE.listerDepartments().get(1), "jean.dupont@email.com", "0606060606"));
-		this.listeCollaborateurs.add(new Collaborateur("Robert", "Dupond", "Dev",
-				Constantes.DEPART_SERVICE.listerDepartments().get(0), "robert.dupont@email.com", "0707070707"));
-		this.listeCollaborateurs.add(new Collaborateur("Nicolas", "Cage", "Dev",
-				Constantes.DEPART_SERVICE.listerDepartments().get(2), "robert.dupont@email.com", "0707070707"));
+		
 	}
 }
